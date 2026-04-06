@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto | Café Don Leo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="topbar"><div class="container"><small>📲 Contacto directo</small><small>✉️ Formulario listo para conectar</small></div></div>
+  <header class="header"><div class="container navbar"><a class="logo" href="index.html"><div class="logo-mark">☕</div><div class="logo-text"><strong>Café Don Leo</strong><span>100% COSTARRICENSE</span></div></a><button class="mobile-toggle" aria-label="Abrir menú">☰</button><div class="nav-shell"><nav class="nav-links"><a href="index.html">Inicio</a><a href="tienda.html">Tienda</a><a href="nuestro-cafe.html">Nuestro Café</a><a href="preparacion.html">Preparación</a><a href="empresas-eventos.html">Empresas y Eventos</a><a class="active" href="contacto.html">Contacto</a></nav><div class="nav-cta"><a class="btn btn-secondary btn-sm" href="index.html">Volver al inicio</a><a class="btn btn-primary btn-sm" href="tienda.html">Ver tienda</a></div></div></div></header>
+
+  <main>
+    <section class="page-hero"><div class="container page-banner"><h1>Contacto</h1><p>Formulario base para conectar con correo, WhatsApp, Formspree, Netlify Forms o un backend propio. También permite diferenciar entre ventas individuales y requerimientos corporativos.</p></div></section>
+
+    <section class="section">
+      <div class="container contact-grid">
+        <div class="form-card">
+          <h2 class="section-title" style="font-size:2.2rem; margin-top:0;">Escribinos</h2>
+          <p class="section-subtitle">Esta demo muestra la estructura. Al subirla a GitHub, podés enlazar el formulario a la solución que prefirás.</p>
+          <form onsubmit="handleContactForm(event)">
+            <div class="form-grid">
+              <input class="form-control" type="text" name="nombre" placeholder="Nombre completo" required />
+              <input class="form-control" type="email" name="correo" placeholder="Correo electrónico" required />
+              <input class="form-control" type="tel" name="telefono" placeholder="Teléfono / WhatsApp" />
+              <select class="form-control" name="interes">
+                <option value="consulta">Consulta general</option>
+                <option value="pedido">Pedido de café</option>
+                <option value="suscripcion">Suscripción</option>
+                <option value="corporativo">Pedido corporativo</option>
+                <option value="evento">Evento</option>
+              </select>
+              <textarea class="form-control full" name="mensaje" placeholder="Contanos qué necesitás..."></textarea>
+            </div>
+            <div class="hero-actions" style="margin-top:18px;"><button class="btn btn-primary" type="submit">Enviar consulta</button><a class="btn btn-secondary" href="#datos">Ver datos de contacto</a></div>
+          </form>
+        </div>
+        <div class="split-panel" id="datos">
+          <h3 style="margin-top:0;">Datos de contacto</h3>
+          <div class="list-check">
+            <div><span>☎</span><div><strong>Teléfono</strong><br><span class="muted">2242-2800</span></div></div>
+            <div><span>✉</span><div><strong>Correo</strong><br><span class="muted">hola@cafedonleo.cr</span></div></div>
+            <div><span>📍</span><div><strong>Ubicación</strong><br><span class="muted">San José, Costa Rica</span></div></div>
+            <div><span>💬</span><div><strong>Canales</strong><br><span class="muted">WhatsApp, Instagram y formulario web</span></div></div>
+          </div>
+          <div class="notice" style="margin-top:22px;">Recomendación: agregar botón flotante de WhatsApp y automatización de respuestas frecuentes con base en el FAQ cargado. fileciteturn0file0L55-L71</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-top"><div><div class="logo" style="margin-bottom:14px;"><div class="logo-mark">☕</div><div class="logo-text"><strong style="color:#fff;">Café Don Leo</strong><span>100% COSTARRICENSE</span></div></div><p>Página preparada para integrar contacto, ventas y soporte.</p></div><div><h4>Secciones</h4><ul><li><a href="tienda.html">Tienda</a></li><li><a href="nuestro-cafe.html">Nuestro Café</a></li></ul></div><div><h4>Negocio</h4><ul><li><a href="empresas-eventos.html">Empresas y Eventos</a></li><li><a href="preparacion.html">Preparación</a></li></ul></div><div><h4>Correo</h4><p>hola@cafedonleo.cr</p></div></div><div class="container footer-bottom"><small>© <span id="year"></span> Café Don Leo</small><small>Lista para publicar</small></div></footer>
+  <script src="script.js"></script>
+</body>
+</html>
