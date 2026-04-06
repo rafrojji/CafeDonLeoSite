@@ -6,6 +6,20 @@
   <title>Café Don Leo | Café costarricense de origen</title>
   <meta name="description" content="Sitio web de Café Don Leo. Café costarricense de origen, tienda en línea, suscripciones, pedidos corporativos y asistencia virtual." />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    df-messenger {
+      --df-messenger-bot-message: #5a3825;
+      --df-messenger-button-titlebar-color: #6f4a2d;
+      --df-messenger-chat-background-color: #f7f1ea;
+      --df-messenger-font-color: #ffffff;
+      --df-messenger-send-icon: #6f4a2d;
+      --df-messenger-user-message: #d8b08c;
+      position: fixed;
+      z-index: 999;
+      bottom: 20px;
+      right: 20px;
+    }
+  </style>
 </head>
 <body>
   <div class="topbar">
@@ -169,7 +183,7 @@
         <div>
           <h2 class="section-title" style="color:white; margin-top:0;">Una web pensada para vender, informar y atender</h2>
           <p class="section-subtitle" style="color:rgba(255,255,255,.85);">
-            La propuesta integra catálogo, contenido de valor, chatbot visible, acceso directo a WhatsApp, pedidos corporativos y mensajes claros de envío, pago y preparación.
+            La propuesta integra catálogo, contenido de valor, acceso directo a WhatsApp, pedidos corporativos y mensajes claros de envío, pago y preparación.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="contacto.html">Solicitar implementación</a>
@@ -227,7 +241,11 @@
   </footer>
 
   <script src="script.js"></script>
-</body>
-</html>
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+  <df-messenger
+    chat-title="DonLeoCafeBot"
+    agent-id="d0288690-dbd8-4442-aae5-00a00a32e837"
+    language-code="es">
+  </df-messenger>
 </body>
 </html>
