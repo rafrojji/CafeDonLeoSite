@@ -255,72 +255,7 @@
     </div>
   </footer>
 
-  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-  chat-title="DonLeoCafé"
-  agent-id="23af4c9b-41a4-488d-91d8-8b00ec74734e"
-  language-code="es"
-></df-messenger>
 
-<!-- Script humanizador -->
-<script>
-  const dfMessenger = document.querySelector('df-messenger');
-
-  dfMessenger.addEventListener('df-response-received', (event) => {
-    const shadow = dfMessenger.shadowRoot;
-    if (!shadow) return;
-
-    // Busca el chat dentro del shadow DOM
-    const dfChat = shadow.querySelector('df-messenger-chat');
-    if (!dfChat) return;
-
-    const chatShadow = dfChat.shadowRoot;
-    if (!chatShadow) return;
-
-    // Busca la última burbuja del bot y ocúltala temporalmente
-    const allMessages = chatShadow.querySelectorAll('.df-message-bot');
-    const lastMessage = allMessages[allMessages.length - 1];
-
-    if (!lastMessage) return;
-
-    // Oculta la burbuja real
-    lastMessage.style.visibility = 'hidden';
-
-    // Crea el indicador de "escribiendo"
-    const typing = document.createElement('div');
-    typing.id = 'df-typing-indicator';
-    typing.innerHTML = `
-      <span style="
-        display: inline-block;
-        background: #f1f3f4;
-        border-radius: 4px 18px 18px 18px;
-        padding: 10px 16px;
-        font-size: 14px;
-        color: #555;
-        font-family: sans-serif;
-      ">DonLeoCafé está escribiendo<span id="df-dots">...</span></span>
-    `;
-    typing.style.margin = '4px 0 8px 0';
-
-    lastMessage.parentNode.insertBefore(typing, lastMessage);
-
-    // Anima los puntos
-    let d = 0;
-    const dotsEl = typing.querySelector('#df-dots');
-    const dotAnim = setInterval(() => {
-      d = (d + 1) % 4;
-      dotsEl.textContent = '.'.repeat(d || 1);
-    }, 400);
-
-    // Tiempo de delay (en ms) — ajústalo a tu gusto
-    const delay = Math.floor(Math.random() * 1000) + 1500; // entre 1.5s y 2.5s
-
-    setTimeout(() => {
-      clearInterval(dotAnim);
-      typing.remove();
-      lastMessage.style.visibility = 'visible';
-    }, delay);
-  });
 </script>
 </script>
 </script>
