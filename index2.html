@@ -257,7 +257,8 @@
 
   <div id="typingNotice">DonLeoCafeBot está escribiendo...</div>
 
- <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+
 <df-messenger
   id="bot-principal"
   chat-title="DonLeoCafeBot"
@@ -273,15 +274,64 @@
     const typingNotice = document.getElementById("typingNotice");
     const bot = document.getElementById("bot-principal");
 
+    // Bienvenida inicial
     typingNotice.style.display = "block";
-
     setTimeout(() => {
       typingNotice.style.display = "none";
-      if (bot) {
-        bot.setAttribute("expand", "");
-      }
-    }, 3000);
+      if (bot) bot.setAttribute("expand", "");
+    }, 2000);
+
+    // Observa mensajes del usuario para mostrar aviso personalizado
+    setTimeout(() => {
+      attachCustomTypingDelay();
+    }, 2500);
   });
+
+  function attachCustomTypingDelay() {
+    const bot = document.getElementById("bot-principal");
+    const typingNotice = document.getElementById("typingNotice");
+
+    if (!bot) return;
+
+    const tryBind = setInterval(() => {
+      if (!bot.shadowRoot) return;
+
+      const root = bot.shadowRoot;
+      const input = root.querySelector("input, textarea");
+      const buttons = root.querySelectorAll("button");
+
+      if (input && !input.dataset.boundEnter) {
+        input.dataset.boundEnter = "true";
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" && input.value.trim() !== "") {
+            showFakeTyping(3000); // 3000 ms = 3 segundos
+          }
+        });
+      }
+
+      buttons.forEach((btn) => {
+        if (!btn.dataset.boundClick) {
+          btn.dataset.boundClick = "true";
+          btn.addEventListener("click", function () {
+            showFakeTyping(3000); // 3 segundos
+          });
+        }
+      });
+
+      // cuando ya encontró elementos, deja de buscar
+      if (input || buttons.length > 0) {
+        clearInterval(tryBind);
+      }
+    }, 1000);
+
+    function showFakeTyping(duration) {
+      typingNotice.style.display = "block";
+      setTimeout(() => {
+        typingNotice.style.display = "none";
+      }, duration);
+    }
+  }
+</script>
 </script>
 </body>
 </html>
