@@ -101,11 +101,13 @@
 
   <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 
- <df-messenger
-  chat-title="DonLeoCafé"
-  agent-id="23af4c9b-41a4-488d-91d8-8b00ec74734e"
-  language-code="es"
-></df-messenger>
+  <df-messenger
+    id="dfMessenger"
+    chat-title="DonLeoCafeBot"
+    agent-id="d0288690-dbd8-4442-aae5-00a00a32e837"
+    language-code="es"
+    wait-open
+  ></df-messenger>
 
   <script>
     window.addEventListener("load", function () {
