@@ -19,6 +19,21 @@
       bottom: 20px;
       right: 20px;
     }
+
+    #typingNotice {
+      position: fixed;
+      bottom: 95px;
+      right: 20px;
+      background: #6f4a2d;
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 18px;
+      font-size: 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 1000;
+    }
+
   </style>
 </head>
 <body>
@@ -240,12 +255,33 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-  <df-messenger
-    chat-title="DonLeoCafeBot"
-    agent-id="d0288690-dbd8-4442-aae5-00a00a32e837"
-    language-code="es">
-  </df-messenger>
+  <div id="typingNotice">DonLeoCafeBot está escribiendo...</div>
+
+ <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  id="bot-principal"
+  chat-title="DonLeoCafeBot"
+  agent-id="d0288690-dbd8-4442-aae5-00a00a32e837"
+  language-code="es"
+  wait-open>
+</df-messenger>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  window.addEventListener("load", function () {
+    const typingNotice = document.getElementById("typingNotice");
+    const bot = document.getElementById("bot-principal");
+
+    typingNotice.style.display = "block";
+
+    setTimeout(() => {
+      typingNotice.style.display = "none";
+      if (bot) {
+        bot.setAttribute("expand", "");
+      }
+    }, 1800);
+  });
+</script>
 </body>
 </html>
