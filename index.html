@@ -21,7 +21,82 @@
     }
   </style>
 </head>
-<body>
+
+
+ 
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  chat-title="DonLeoCafeBot"
+  agent-id="d0288690-dbd8-4442-aae5-00a00a32e837"
+  language-code="es"
+   chat-icon="https://rafrojji.github.io/CafeDonLeoSite/iconotazacafe.png">
+></df-messenger>
+
+<!-- Script humanizador -->
+<script>
+  const dfMessenger = document.querySelector('df-messenger');
+
+  dfMessenger.addEventListener('df-response-received', (event) => {
+    const shadow = dfMessenger.shadowRoot;
+    if (!shadow) return;
+
+    // Busca el chat dentro del shadow DOM
+    const dfChat = shadow.querySelector('df-messenger-chat');
+    if (!dfChat) return;
+
+    const chatShadow = dfChat.shadowRoot;
+    if (!chatShadow) return;
+
+    // Busca la última burbuja del bot y ocúltala temporalmente
+    const allMessages = chatShadow.querySelectorAll('.df-message-bot');
+    const lastMessage = allMessages[allMessages.length - 1];
+
+    if (!lastMessage) return;
+
+    // Oculta la burbuja real
+    lastMessage.style.visibility = 'hidden';
+
+    // Crea el indicador de "escribiendo"
+    const typing = document.createElement('div');
+    typing.id = 'df-typing-indicator';
+    typing.innerHTML = `
+      <span style="
+        display: inline-block;
+        background: #f1f3f4;
+        border-radius: 4px 18px 18px 18px;
+        padding: 10px 16px;
+        font-size: 14px;
+        color: #555;
+        font-family: sans-serif;
+      ">DonLeoCafé está escribiendo<span id="df-dots">...</span></span>
+    `;
+    typing.style.margin = '4px 0 8px 0';
+
+    lastMessage.parentNode.insertBefore(typing, lastMessage);
+
+    // Anima los puntos
+    let d = 0;
+    const dotsEl = typing.querySelector('#df-dots');
+    const dotAnim = setInterval(() => {
+      d = (d + 1) % 4;
+      dotsEl.textContent = '.'.repeat(d || 1);
+    }, 400);
+
+    // Tiempo de delay (en ms) — ajústalo a tu gusto
+    const delay = Math.floor(Math.random() * 1000) + 1500; // entre 1.5s y 2.5s
+
+    setTimeout(() => {
+      clearInterval(dotAnim);
+      typing.remove();
+      lastMessage.style.visibility = 'visible';
+    }, delay);
+  });
+</script>
+
+  
+  
+  
+  <body>
   <div class="topbar">
     <div class="container">
       <small>🚚 Envíos a todo Costa Rica | Envío gratis desde ₡20.000</small>
@@ -239,13 +314,7 @@
       <small>Diseño cálido, comercial y orientado a conversión.</small>
     </div>
   </footer>
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-  chat-title="DonLeoCafeBot"
-  agent-id="d0288690-dbd8-4442-aae5-00a00a32e837"
-  language-code="es"
-   chat-icon="https://rafrojji.github.io/CafeDonLeoSite/iconotazacafe.png">
-></df-messenger>
+
 
 </body>
 </html>
