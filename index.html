@@ -241,7 +241,16 @@
   </footer>
 
  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
+df-messenger {
+  --df-messenger-chat-window-width: 360px;
+  --df-messenger-chat-window-height: 500px;
+}
+
+df-messenger::part(chat-button) {
+  width: 72px;
+  height: 72px;
+}>
+  <df-messenger
   id="bot-principal"
   chat-title="DonLeoCafeBot"
   agent-id="d0288690-dbd8-4442-aae5-00a00a32e837"
