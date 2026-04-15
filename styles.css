@@ -614,3 +614,12 @@ textarea.form-control {
   .form-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; }
 }
+df-messenger {
+  --df-messenger-chat-window-width: 360px;
+  --df-messenger-chat-window-height: 500px;
+}
+
+df-messenger::part(chat-button) {
+  width: 72px;
+  height: 72px;
+}
