@@ -623,3 +623,258 @@ df-messenger::part(chat-button) {
   width: 72px;
   height: 72px;
 }
+
+/* =========================================
+   CHATBOT DON LEO CAFÉ
+========================================= */
+
+.chatbot-button {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1000;
+
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+
+  background: #6f4a2d;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.chatbot-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 11px 28px rgba(0, 0, 0, 0.3);
+}
+
+.chatbot-button-icon {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.chatbot-window {
+  position: fixed;
+  right: 22px;
+  bottom: 100px;
+  z-index: 1001;
+
+  width: min(390px, calc(100vw - 30px));
+  height: 570px;
+  max-height: calc(100vh - 130px);
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background: #fff;
+  border: 1px solid rgba(111, 74, 45, 0.2);
+  border-radius: 18px;
+
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+}
+
+.chatbot-window[hidden] {
+  display: none;
+}
+
+.chatbot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px 18px;
+
+  background: #6f4a2d;
+  color: #fff;
+}
+
+.chatbot-header-info {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.chatbot-header-info div {
+  display: flex;
+  flex-direction: column;
+}
+
+.chatbot-header-info strong {
+  font-size: 16px;
+}
+
+.chatbot-header-info span {
+  margin-top: 2px;
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.chatbot-header-icon {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.chatbot-close {
+  border: none;
+  background: transparent;
+  color: #fff;
+
+  font-size: 30px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.chatbot-messages {
+  flex: 1;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  padding: 18px;
+
+  background: #f7f1ea;
+}
+
+.chatbot-message {
+  max-width: 84%;
+  padding: 11px 14px;
+
+  border-radius: 16px;
+
+  font-size: 14px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.chatbot-assistant-message {
+  align-self: flex-start;
+
+  color: #3c2a20;
+  background: #fff;
+
+  border-bottom-left-radius: 5px;
+}
+
+.chatbot-user-message {
+  align-self: flex-end;
+
+  color: #fff;
+  background: #6f4a2d;
+
+  border-bottom-right-radius: 5px;
+}
+
+.chatbot-error-message {
+  align-self: flex-start;
+
+  color: #8b1e1e;
+  background: #ffe3e3;
+}
+
+.chatbot-loading-message {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.chatbot-form {
+  display: flex;
+  gap: 9px;
+
+  padding: 13px;
+
+  background: #fff;
+  border-top: 1px solid #e5d9ce;
+}
+
+.chatbot-form input {
+  flex: 1;
+  min-width: 0;
+
+  padding: 11px 12px;
+
+  border: 1px solid #c9b7a8;
+  border-radius: 9px;
+
+  font: inherit;
+  outline: none;
+}
+
+.chatbot-form input:focus {
+  border-color: #6f4a2d;
+  box-shadow: 0 0 0 2px rgba(111, 74, 45, 0.12);
+}
+
+.chatbot-form button {
+  padding: 11px 15px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #6f4a2d;
+  color: #fff;
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.chatbot-form button:hover {
+  background: #563722;
+}
+
+.chatbot-form button:disabled,
+.chatbot-form input:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.sr-only {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+
+  border: 0;
+}
+
+@media (max-width: 600px) {
+  .chatbot-button {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .chatbot-window {
+    right: 10px;
+    bottom: 88px;
+
+    width: calc(100vw - 20px);
+    height: min(600px, calc(100vh - 110px));
+  }
+}
