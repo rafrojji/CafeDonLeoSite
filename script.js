@@ -15,3 +15,5 @@ function handleContactForm(event) {
   alert(`Gracias, ${name || 'cliente'}. Tu ${interest} fue registrada. Este sitio demo está listo para conectar con correo, WhatsApp o un backend.`);
   form.reset();
 }
+const DON_LEO_API_URL =
+  'https://donleo-backend-production.up.railway.app';
