@@ -9,6 +9,84 @@
 
 </head>
 
+  <!-- Chatbot Don Leo Café con OpenAI -->
+
+<button
+  id="chatbot-button"
+  class="chatbot-button"
+  type="button"
+  aria-label="Abrir asistente virtual"
+>
+  <img
+    src="iconotazacafe.png"
+    alt=""
+    class="chatbot-button-icon"
+  >
+</button>
+
+<section
+  id="chatbot-window"
+  class="chatbot-window"
+  aria-label="Asistente virtual Don Leo Café"
+  hidden
+>
+  <header class="chatbot-header">
+
+    <div class="chatbot-header-info">
+      <img
+        src="iconotazacafe.png"
+        alt=""
+        class="chatbot-header-icon"
+      >
+
+      <div>
+        <strong>Don Leo Café</strong>
+        <span>Asistente virtual</span>
+      </div>
+    </div>
+
+    <button
+      id="chatbot-close"
+      class="chatbot-close"
+      type="button"
+      aria-label="Cerrar asistente"
+    >
+      ×
+    </button>
+
+  </header>
+
+  <div
+    id="chatbot-messages"
+    class="chatbot-messages"
+    aria-live="polite"
+  >
+    <div class="chatbot-message chatbot-assistant-message">
+      ¡Hola! Soy el asistente virtual de Don Leo Café. Puedo ayudarte con nuestros cafés, precios, métodos de preparación, envíos y pedidos.
+    </div>
+  </div>
+
+  <form id="chatbot-form" class="chatbot-form">
+
+    <label for="chatbot-input" class="sr-only">
+      Escriba su consulta
+    </label>
+
+    <input
+      id="chatbot-input"
+      type="text"
+      placeholder="Escribí tu consulta..."
+      maxlength="500"
+      autocomplete="off"
+      required
+    >
+
+    <button id="chatbot-send" type="submit">
+      Enviar
+    </button>
+
+  </form>
+</section>
   
   
   <body>
