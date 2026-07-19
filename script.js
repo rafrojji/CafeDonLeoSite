@@ -102,11 +102,35 @@ function addChatbotMessage(text, type = 'assistant') {
   message.textContent = text;
 
   chatbotMessages.appendChild(message);
-  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+  /*
+   * Para mensajes del usuario y de carga,
+   * desplazamos el chat al final.
+   */
+  if (type === 'user' || type === 'loading') {
+    chatbotMessages.scrollTo({
+      top: chatbotMessages.scrollHeight,
+      behavior: 'smooth'
+    });
+  }
+
+  /*
+   * Para respuestas largas del asistente,
+   * mostramos el inicio del nuevo mensaje.
+   */
+  if (type === 'assistant' || type === 'error') {
+    setTimeout(() => {
+      const messageTop = message.offsetTop - 12;
+
+      chatbotMessages.scrollTo({
+        top: messageTop,
+        behavior: 'smooth'
+      });
+    }, 50);
+  }
 
   return message;
 }
-
 
 function setChatbotDisabled(disabled) {
   if (chatbotInput) {
