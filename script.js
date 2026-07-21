@@ -50,8 +50,21 @@ function handleContactForm(event) {
 // CHATBOT DON LEO CAFÉ
 // ==========================================
 
-const DON_LEO_API_URL =
-  'https://donleo-backend-production.up.railway.app';
+ const DON_LEO_API_URL = 
+ 'https://donleo-backend-production.up.railway.app';
+
+/*
+ * Cada navegador conserva su propia sesión.
+ * Si ya existe una, se reutiliza.
+ */
+let idSesion = localStorage.getItem("donleoSesion");
+
+if (!idSesion) {
+  idSesion = crypto.randomUUID();
+  localStorage.setItem("donleoSesion", idSesion);
+}
+
+const historialChat = [];
 
 const chatbotButton =
   document.getElementById('chatbot-button');
@@ -132,6 +145,7 @@ function addChatbotMessage(text, type = 'assistant') {
   return message;
 }
 
+
 function setChatbotDisabled(disabled) {
   if (chatbotInput) {
     chatbotInput.disabled = disabled;
@@ -191,46 +205,97 @@ function toggleChatbot() {
 
 
 async function askDonLeo(pregunta) {
-  const response = await fetch(
-    `${DON_LEO_API_URL}/preguntar`,
-    {
-      method: 'POST',
+  /*
+   * Primero guardamos el nuevo mensaje del usuario
+   * en el historial local.
+   */
+  historialChat.push({
+    role: 'user',
+    content: pregunta
+  });
 
-      headers: {
-        'Content-Type': 'application/json'
-      },
+  /*
+   * Enviamos el historial anterior, sin incluir nuevamente
+   * la pregunta actual. El backend será el encargado de agregarla.
+   */
+  const historialAnterior = historialChat.slice(0, -1);
 
-      body: JSON.stringify({
-        pregunta
-      })
-    }
-  );
+  let response;
+
+  try {
+    response = await fetch(
+      `${DON_LEO_API_URL}/preguntar`,
+      {
+        method: 'POST',
+
+        headers: {
+          'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify({
+         idSesion,
+         pregunta,
+        historial: historialAnterior
+        })
+
+      }
+    );
+  } catch (error) {
+    /*
+     * Si la solicitud falla completamente, eliminamos del historial
+     * el mensaje que no pudo ser procesado.
+     */
+    historialChat.pop();
+
+    throw new Error(
+      'No fue posible conectarse con el servidor.'
+    );
+  }
 
   let data;
 
   try {
     data = await response.json();
   } catch {
+    historialChat.pop();
+
     throw new Error(
       'El servidor respondió en un formato no válido.'
     );
   }
 
   if (!response.ok) {
+    historialChat.pop();
+
     throw new Error(
       data.error || 'No fue posible procesar la consulta.'
     );
   }
 
   if (!data.respuesta) {
+    historialChat.pop();
+
     throw new Error(
       'El asistente no devolvió una respuesta.'
     );
   }
 
+  /*
+   * Cuando la respuesta fue exitosa, también la guardamos
+   * en el historial.
+   */
+  historialChat.push({
+    role: 'assistant',
+    content: data.respuesta
+  });
+
   return data.respuesta;
 }
 
+
+// ==========================================
+// EVENTOS DEL CHATBOT
+// ==========================================
 
 // Abrir o cerrar el chatbot.
 if (chatbotButton) {
@@ -282,7 +347,8 @@ if (chatbotForm) {
       );
 
       addChatbotMessage(
-        'Lo siento, no pude comunicarme con el asistente. Intentalo nuevamente en unos segundos.',
+        error.message ||
+        'Lo siento, no pude comunicarme con el asistente. Inténtalo nuevamente en unos segundos.',
         'error'
       );
     } finally {
